@@ -4,6 +4,7 @@ import main.school.data.DataException;
 import main.school.data.abstractions.CourseRepository;
 import main.school.data.abstractions.EditionRepository;
 import main.school.data.abstractions.InstructorRepository;
+import main.school.data.implementations.InFileCourseRepository;
 import main.school.data.implementations.InMemoryCourseRepository;
 import main.school.data.implementations.InMemoryEditionRepository;
 import main.school.data.implementations.InMemoryInstructorRepository;
@@ -12,6 +13,8 @@ import main.school.services.AbstractSchoolService;
 import main.school.services.SchoolService;
 import main.school.ui.Console;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -22,7 +25,10 @@ public class Program {
 
         //dobbiamo capirne il perchè di Dependency Injection!!!
 
-        CourseRepository cr = new InMemoryCourseRepository();
+        //CourseRepository cr = new InMemoryCourseRepository();
+
+        CourseRepository cr = new InFileCourseRepository("/home/luigi/IdeaProjects/breakout1/src/main/school/data/implementations/file.csv");
+
         EditionRepository er = new InMemoryEditionRepository();
         InstructorRepository ir = new InMemoryInstructorRepository();
         AbstractSchoolService asc = new SchoolService(cr, er, ir);
